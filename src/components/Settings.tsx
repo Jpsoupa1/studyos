@@ -115,21 +115,6 @@ export default function Settings() {
           <Key size={15} style={{ color: 'var(--purple)' }} />
           <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 14, color: 'var(--text-1)' }}>Configuração</h3>
         </div>
-        <p style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 12, lineHeight: 1.5 }}>
-          Configure estas variáveis no arquivo <code style={{ color: 'var(--amber)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>.env.local</code>. Nunca faça commit desse arquivo.
-        </p>
-        <div className="flex flex-col gap-2">
-          {[
-            { key: 'VITE_SUPABASE_URL',       desc: 'URL do projeto Supabase' },
-            { key: 'VITE_SUPABASE_ANON_KEY',   desc: 'Chave anônima do Supabase' },
-            { key: 'VITE_GOOGLE_CLIENT_ID',    desc: 'Client ID do Google OAuth' },
-          ].map(({ key, desc }) => (
-            <div key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '7px 10px', background: 'var(--bg-2)', border: '1px solid var(--line)', borderRadius: 6 }}>
-              <code style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-2)' }}>{key}</code>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-4)', letterSpacing: '0.04em' }}>{desc}</span>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   )
