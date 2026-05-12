@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Dashboard from '@/components/Dashboard'
 import AuthScreen from '@/components/AuthScreen'
+import CalendarSetup from '@/components/CalendarSetup'
 import { useTaskReminders } from '@/hooks/useTaskReminders'
 import { useGoogleCalendarSync } from '@/hooks/useGoogleCalendarSync'
 import { useTaskStore } from '@/store/taskStore'
@@ -9,6 +10,7 @@ import { useReminderStore } from '@/store/reminderStore'
 import { useAuthStore } from '@/store/authStore'
 import { useThemeStore } from '@/store/themeStore'
 import { supabase } from '@/lib/supabase'
+import { getToken } from '@/services/google'
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
@@ -33,6 +35,11 @@ function AppContent() {
   const { loadFromDB: loadTasks }     = useTaskStore()
   const { loadFromDB: loadReminders } = useReminderStore()
 
+  // Mostra o setup do Google Calendar se ainda não conectado e não pulado nesta sessão
+  const [calReady, setCalReady] = useState(
+    () => !!getToken() || !!sessionStorage.getItem('cal-setup-skipped')
+  )
+
   useEffect(() => {
     void loadTasks()
     void loadReminders()
@@ -40,6 +47,11 @@ function AppContent() {
 
   useTaskReminders()
   useGoogleCalendarSync()
+
+  if (!calReady) {
+    return <CalendarSetup onDone={() => setCalReady(true)} />
+  }
+
   return <Dashboard />
 }
 
