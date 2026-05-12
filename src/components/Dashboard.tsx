@@ -10,7 +10,7 @@ import { useUserStore } from '@/store/userStore'
 import { useTaskStore } from '@/store/taskStore'
 import { useAuthStore } from '@/store/authStore'
 import { useThemeStore } from '@/store/themeStore'
-import { getLevelName, daysUntil } from '@/types'
+import { daysUntil } from '@/types'
 import TasksOverview from './TasksOverview'
 import TaskList from './TaskList'
 import WeeklyCalendar from './WeeklyCalendar'
@@ -61,7 +61,6 @@ function Sidebar({ view, setView, collapsed, setCollapsed }: {
   const { user: profile, signOut: logout } = useAuthStore()
   const { theme, toggle: toggleTheme } = useThemeStore()
   const isDark  = theme === 'dark'
-  const level   = getLevelName(stats.xp)
 
   return (
     <motion.aside
@@ -97,10 +96,8 @@ function Sidebar({ view, setView, collapsed, setCollapsed }: {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="profile">
             <div className="profile-row">
-              <div className="avatar">{profile?.name ? profile.name.slice(0, 2).toUpperCase() : 'US'}</div>
               <div style={{ minWidth: 0 }}>
                 <div className="profile-name">{profile?.name || 'Usuário'}</div>
-                <div className="profile-level">▰▰▱▱  {level}</div>
               </div>
             </div>
             <div className="profile-stats">
@@ -302,6 +299,7 @@ function DashboardHome({ onNewTaskAtTime, isMobile }: {
 
       {/* Sidebar direita — sticky */}
       <div className="flex flex-col gap-4" style={{ position: 'sticky', top: 0 }}>
+        <Pomodoro />
         <ReminderPanel />
         <DailyChecklist />
       </div>
