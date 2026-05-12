@@ -33,9 +33,10 @@
   --color-violet-soft:#F5F3FF;
 
   /* Fonts */
-  --font-sans:    'DM Sans',    ui-sans-serif,  system-ui, sans-serif;
-  --font-display: 'Syne',       ui-sans-serif,  system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --font-sans:    'Inter',         ui-sans-serif, system-ui, sans-serif;
+  --font-body:    'Inter',         ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code',  ui-monospace, monospace;
 }
 
 /* ─── CSS custom properties (para uso inline e fallback) ─────────────────── */
@@ -124,12 +125,13 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text-1);
-  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-  letter-spacing: -0.01em;
-  line-height: 1.5;
+  letter-spacing: -0.012em;
+  line-height: 1.55;
 }
 
 /* Mobile: allow scrolling body */
@@ -150,7 +152,7 @@ body {
 }
 
 /* ─── Tipografia ─────────────────────────────────────────────────────────── */
-.font-display { font-family: 'Syne', ui-sans-serif, system-ui, sans-serif; }
+.font-display { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; }
 .font-mono    { font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace !important; }
 
 /* ─── Card & Shadow System ───────────────────────────────────────────────── */
@@ -333,16 +335,16 @@ select:focus-visible {
 /* ── Typography utilities ── */
 .kicker {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
+  font-size: 11px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-4);
   font-weight: 500;
 }
 .label-mono {
   font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
+  font-size: 11px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-3);
   font-weight: 500;
@@ -371,8 +373,8 @@ select:focus-visible {
 .brand-name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 14px;
-  letter-spacing: -0.01em;
+  font-size: 16px;
+  letter-spacing: -0.02em;
   line-height: 1;
   color: var(--text-1);
 }
@@ -402,11 +404,11 @@ select:focus-visible {
   font-size: 12px;
   flex-shrink: 0;
 }
-.profile-name { font-weight: 600; font-size: 13px; color: var(--text-1); }
+.profile-name { font-weight: 600; font-size: 14px; color: var(--text-1); }
 .profile-level {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--amber);
   margin-top: 2px;
@@ -417,14 +419,14 @@ select:focus-visible {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 4px;
 }
-.profile-stat .v { font-family: var(--font-mono); font-size: 14px; color: var(--text-1); font-weight: 600; }
-.profile-stat .l { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-4); margin-top: 1px; }
+.profile-stat .v { font-family: var(--font-mono); font-size: 15px; color: var(--text-1); font-weight: 600; }
+.profile-stat .l { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-4); margin-top: 1px; }
 
 .nav { padding: 8px 8px; flex: 1; overflow-y: auto; }
 .nav-section {
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.18em;
+  font-size: 10px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-4);
   padding: 12px 10px 6px;
@@ -436,7 +438,7 @@ select:focus-visible {
   padding: 8px 10px;
   border-radius: 8px;
   color: var(--text-2);
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   position: relative;
   border: 1px solid transparent;
@@ -471,7 +473,7 @@ select:focus-visible {
   align-items: center;
   gap: 10px;
   padding: 7px 10px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-3);
   cursor: pointer;
   border-radius: 8px;
@@ -490,8 +492,8 @@ select:focus-visible {
 }
 .crumb {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
+  font-size: 11px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-4);
   margin-bottom: 8px;
@@ -500,18 +502,18 @@ select:focus-visible {
 .page-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(28px, 4vw, 40px);
-  letter-spacing: -0.02em;
-  line-height: 1;
+  font-size: clamp(26px, 3.5vw, 38px);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
   color: var(--text-1);
 }
-.page-title .slash { color: var(--amber); margin: 0 6px; font-weight: 400; }
+.page-title .slash { color: var(--amber); margin: 0 6px; font-weight: 300; }
 .page-sub {
   margin-top: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-3);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
 }
 .head-right { display: flex; align-items: center; gap: 8px; }
 
@@ -545,8 +547,8 @@ select:focus-visible {
 .kpi:last-child { border-right: 0; }
 .kpi-label {
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.18em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-4);
   margin-bottom: 10px;
@@ -584,15 +586,15 @@ select:focus-visible {
 .tile-head h3 {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 13.5px;
+  font-size: 15px;
   color: var(--text-1);
 }
 .tile-head .badge {
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.14em;
+  font-size: 10px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 2px 6px;
+  padding: 2px 7px;
   border: 1px solid var(--line);
   border-radius: 4px;
   color: var(--text-3);
@@ -624,8 +626,8 @@ select:focus-visible {
   flex-shrink: 0;
 }
 .task.done .task-check { background: var(--green); border-color: var(--green); }
-.task-title { font-size: 13.5px; color: var(--text-1); font-weight: 500; line-height: 1.3; }
-.task-meta { display: flex; gap: 10px; margin-top: 4px; font-family: var(--font-mono); font-size: 10px; color: var(--text-3); flex-wrap: wrap; }
+.task-title { font-size: 14.5px; color: var(--text-1); font-weight: 500; line-height: 1.35; }
+.task-meta { display: flex; gap: 10px; margin-top: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--text-3); flex-wrap: wrap; }
 .task-meta .cat {
   padding: 1px 5px;
   border: 1px solid var(--line);
@@ -720,8 +722,8 @@ select:focus-visible {
 }
 .reminder:last-child { border-bottom: 0; }
 .reminder .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.reminder .txt { font-size: 13px; color: var(--text-1); line-height: 1.3; }
-.reminder .when { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); margin-top: 2px; }
+.reminder .txt { font-size: 14px; color: var(--text-1); line-height: 1.35; }
+.reminder .when { font-family: var(--font-mono); font-size: 11px; color: var(--text-3); margin-top: 2px; }
 .reminder .pill {
   font-family: var(--font-mono); font-size: 9px;
   letter-spacing: 0.12em; text-transform: uppercase;

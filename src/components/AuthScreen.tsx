@@ -263,7 +263,7 @@ export default function AuthScreen() {
             Study<span className="slash">/</span>OS
           </p>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-4)', marginTop: 6 }}>
-            AXIS Lab · Sistema de Produtividade
+            Sistema de Produtividade Acadêmica
           </p>
         </div>
       </motion.div>
@@ -288,9 +288,6 @@ export default function AuthScreen() {
         </AnimatePresence>
       </div>
 
-      <p style={{ position: 'absolute', bottom: 20, fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--text-4)' }}>
-        STUDYOS · BUILD 1.0.0 · AXIS LAB
-      </p>
     </div>
   )
 }

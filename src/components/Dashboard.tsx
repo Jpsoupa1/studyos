@@ -34,7 +34,7 @@ const NAV: { id: View; label: string; icon: React.ElementType }[] = [
   { id: 'reminders',    label: 'Lembretes',     icon: Bell            },
   { id: 'pomodoro',     label: 'Pomodoro',      icon: Timer           },
   { id: 'calendar',     label: 'Google Agenda', icon: Calendar        },
-  { id: 'coach',        label: 'AXIS Coach',    icon: Bot             },
+  { id: 'coach',        label: 'Coach',         icon: Bot             },
   { id: 'stats',        label: 'Stats',         icon: BarChart2       },
   { id: 'achievements', label: 'Conquistas',    icon: Trophy          },
   { id: 'settings',     label: 'Config',        icon: SettingsIcon    },
@@ -82,7 +82,6 @@ function Sidebar({ view, setView, collapsed, setCollapsed }: {
           {!collapsed && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="brand-text">
               <div className="brand-name">Study OS</div>
-              <div className="brand-sub">AXIS Lab · v1.0</div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -303,7 +302,6 @@ function DashboardHome({ onNewTaskAtTime, isMobile }: {
 
       {/* Sidebar direita — sticky */}
       <div className="flex flex-col gap-4" style={{ position: 'sticky', top: 0 }}>
-        <Pomodoro />
         <ReminderPanel />
         <DailyChecklist />
       </div>
