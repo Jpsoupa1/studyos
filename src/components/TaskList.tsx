@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Trash2, ChevronDown, ChevronRight, CheckCircle2, Circle, CalendarCheck } from 'lucide-react'
+import { Trash2, ChevronDown, ChevronRight, CheckCircle2, Circle, CalendarCheck, Pencil } from 'lucide-react'
 import { useTaskStore } from '@/store/taskStore'
 import { useUserStore } from '@/store/userStore'
 import {
   getCategoryColor,
   formatTimeRange, isoToDDMMYYYY, cn,
 } from '@/lib/utils'
-import { daysUntil, urgencyColor, taskOccursOn, type TaskCategory } from '@/types'
+import { daysUntil, urgencyColor, taskOccursOn, type Task, type TaskCategory } from '@/types'
 import { getToken, deleteCalendarEvent } from '@/services/google'
 import ProgressBar from './ui/ProgressBar'
 import Button from './ui/Button'
+import TaskForm from './TaskForm'
 
 export default function TaskList() {
   const {
@@ -19,8 +20,9 @@ export default function TaskList() {
   } = useTaskStore()
   const { recordTaskDone } = useUserStore()
 
-  const [expanded, setExpanded] = useState<string | null>(null)
-  const [subInput, setSubInput]  = useState('')
+  const [expanded,    setExpanded]    = useState<string | null>(null)
+  const [subInput,    setSubInput]    = useState('')
+  const [editingTask, setEditingTask] = useState<Task | null>(null)
 
   useEffect(() => { void loadFromDB() }, [])
 
@@ -142,6 +144,10 @@ export default function TaskList() {
                     <button className="icon-btn" onClick={() => setExpanded(expanded === task.id ? null : task.id)}>
                       {expanded === task.id ? <ChevronDown size={11} /> : <ChevronRight size={11} />}
                     </button>
+                    <button className="icon-btn" onClick={() => setEditingTask(task)}
+                      style={{ color: 'var(--amber)' }}>
+                      <Pencil size={11} />
+                    </button>
                     <button className="icon-btn" onClick={() => void handleDelete(task.id, task.calendarEventId)}
                       style={{ color: 'var(--red)' }}>
                       <Trash2 size={11} />
@@ -183,6 +189,12 @@ export default function TaskList() {
           })}
         </AnimatePresence>
       </div>
+
+      <TaskForm
+        isOpen={!!editingTask}
+        onClose={() => setEditingTask(null)}
+        task={editingTask ?? undefined}
+      />
     </div>
   )
 }

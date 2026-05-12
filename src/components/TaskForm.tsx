@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Clock, Tag, Flag, CalendarPlus, Calendar } from 'lucide-react'
 import { useTaskStore, type AddTaskOptions } from '@/store/taskStore'
-import { getToken, createCalendarEvent } from '@/services/google'
+import { getToken, createCalendarEvent, deleteCalendarEvent } from '@/services/google'
 import {
   getCategoryColor, getCategoryBg, getPriorityColor,
   isoToDDMMYYYY, ddmmyyyyToISO, isValidDDMMYYYY, todayISO,
 } from '@/lib/utils'
-import { WEEKDAY_LABELS, type TaskCategory, type TaskPriority, type WeekdayIndex } from '@/types'
+import { WEEKDAY_LABELS, type Task, type TaskCategory, type TaskPriority, type WeekdayIndex } from '@/types'
 import Button from './ui/Button'
 
 const CATEGORIES: TaskCategory[] = ['Estudos', 'Exercício', 'Pessoal', 'Trabalho']
@@ -17,10 +17,12 @@ interface TaskFormProps {
   isOpen:        boolean
   onClose:       () => void
   defaultStart?: string
+  task?:         Task   // se fornecido, entra em modo edição
 }
 
-export default function TaskForm({ isOpen, onClose, defaultStart }: TaskFormProps) {
-  const { addTask, updateCalendarEventId } = useTaskStore()
+export default function TaskForm({ isOpen, onClose, defaultStart, task }: TaskFormProps) {
+  const { addTask, updateTask, updateCalendarEventId } = useTaskStore()
+  const isEditing = !!task
 
   const [text,      setText]      = useState('')
   const [cat,       setCat]       = useState<TaskCategory>('Estudos')
@@ -36,17 +38,29 @@ export default function TaskForm({ isOpen, onClose, defaultStart }: TaskFormProp
 
   useEffect(() => {
     if (!isOpen) return
-    const today = isoToDDMMYYYY(todayISO())
-    setStartDate(today)
-    setEndDate(today)
-    setStartTime(defaultStart ?? '09:00')
-    setEndTime('10:00')
-    setWeekDays([])
-    setText('')
-    setCat('Estudos')
-    setPrio('Média')
+    if (task) {
+      // Modo edição: pré-preenche com os dados da tarefa
+      setText(task.text)
+      setCat(task.category)
+      setPrio(task.priority)
+      setStartDate(isoToDDMMYYYY(task.startDate))
+      setEndDate(isoToDDMMYYYY(task.endDate))
+      setStartTime(task.startTime)
+      setEndTime(task.endTime)
+      setWeekDays(task.weekDays)
+    } else {
+      const today = isoToDDMMYYYY(todayISO())
+      setStartDate(today)
+      setEndDate(today)
+      setStartTime(defaultStart ?? '09:00')
+      setEndTime('10:00')
+      setWeekDays([])
+      setText('')
+      setCat('Estudos')
+      setPrio('Média')
+    }
     setError(null)
-  }, [isOpen, defaultStart])
+  }, [isOpen, defaultStart, task])
 
   const toggleWeekDay = (dow: WeekdayIndex) =>
     setWeekDays((prev) =>
@@ -70,18 +84,33 @@ export default function TaskForm({ isOpen, onClose, defaultStart }: TaskFormProp
         startDate: startISO, endDate: endISO,
         startTime, endTime, weekDays,
       }
-      const task = await addTask(opts)
-      if (syncCal) {
-        const token = getToken()
-        if (token) {
-          createCalendarEvent(token, task)
-            .then((id) => updateCalendarEventId(task.id, id))
-            .catch((e) => console.warn('[Study OS] Calendar sync:', e))
+
+      if (isEditing && task) {
+        await updateTask(task.id, opts)
+        // Reagenda evento no Calendar se existir
+        if (syncCal) {
+          const token = getToken()
+          if (token && task.calendarEventId) {
+            deleteCalendarEvent(token, task.calendarEventId).catch(() => {})
+            createCalendarEvent(token, { ...task, ...opts })
+              .then((id) => updateCalendarEventId(task.id, id))
+              .catch((e) => console.warn('[Study OS] Calendar update:', e))
+          }
+        }
+      } else {
+        const created = await addTask(opts)
+        if (syncCal) {
+          const token = getToken()
+          if (token) {
+            createCalendarEvent(token, created)
+              .then((id) => updateCalendarEventId(created.id, id))
+              .catch((e) => console.warn('[Study OS] Calendar sync:', e))
+          }
         }
       }
       onClose()
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Erro ao criar tarefa.')
+      setError(e instanceof Error ? e.message : isEditing ? 'Erro ao salvar tarefa.' : 'Erro ao criar tarefa.')
     } finally {
       setLoading(false)
     }
@@ -122,7 +151,7 @@ export default function TaskForm({ isOpen, onClose, defaultStart }: TaskFormProp
             <div className="tile-head flex-shrink-0" style={{ borderRadius: 0 }}>
               <div className="title-group">
                 <CalendarPlus size={14} color="var(--amber)" />
-                <h3>Nova Tarefa</h3>
+                <h3>{isEditing ? 'Editar Tarefa' : 'Nova Tarefa'}</h3>
               </div>
               <button className="icon-btn" onClick={onClose}><X size={13} /></button>
             </div>
@@ -285,7 +314,7 @@ export default function TaskForm({ isOpen, onClose, defaultStart }: TaskFormProp
               style={{ padding: '12px 18px', borderTop: '1px solid var(--line)', background: 'var(--bg-2)' }}>
               <Button variant="ghost" size="sm" onClick={onClose}>Cancelar</Button>
               <Button size="sm" onClick={() => void handleSubmit()} disabled={loading}>
-                {loading ? 'Criando…' : '+ Criar tarefa'}
+                {loading ? (isEditing ? 'Salvando…' : 'Criando…') : isEditing ? '✓ Salvar alterações' : '+ Criar tarefa'}
               </Button>
             </div>
           </motion.div>

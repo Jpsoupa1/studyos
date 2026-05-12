@@ -126,7 +126,7 @@ body {
   background-color: var(--bg);
   color: var(--text-1);
   font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
@@ -373,7 +373,7 @@ select:focus-visible {
 .brand-name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 17px;
   letter-spacing: -0.02em;
   line-height: 1;
   color: var(--text-1);
@@ -404,10 +404,10 @@ select:focus-visible {
   font-size: 12px;
   flex-shrink: 0;
 }
-.profile-name { font-weight: 600; font-size: 14px; color: var(--text-1); }
+.profile-name { font-weight: 600; font-size: 15px; color: var(--text-1); }
 .profile-level {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--amber);
@@ -435,10 +435,10 @@ select:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px;
+  padding: 9px 10px;
   border-radius: 8px;
   color: var(--text-2);
-  font-size: 14px;
+  font-size: 14.5px;
   cursor: pointer;
   position: relative;
   border: 1px solid transparent;
@@ -586,7 +586,7 @@ select:focus-visible {
 .tile-head h3 {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-1);
 }
 .tile-head .badge {
@@ -626,8 +626,8 @@ select:focus-visible {
   flex-shrink: 0;
 }
 .task.done .task-check { background: var(--green); border-color: var(--green); }
-.task-title { font-size: 14.5px; color: var(--text-1); font-weight: 500; line-height: 1.35; }
-.task-meta { display: flex; gap: 10px; margin-top: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--text-3); flex-wrap: wrap; }
+.task-title { font-size: 15px; color: var(--text-1); font-weight: 500; line-height: 1.35; }
+.task-meta { display: flex; gap: 10px; margin-top: 4px; font-family: var(--font-mono); font-size: 11.5px; color: var(--text-3); flex-wrap: wrap; }
 .task-meta .cat {
   padding: 1px 5px;
   border: 1px solid var(--line);
@@ -722,8 +722,8 @@ select:focus-visible {
 }
 .reminder:last-child { border-bottom: 0; }
 .reminder .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.reminder .txt { font-size: 14px; color: var(--text-1); line-height: 1.35; }
-.reminder .when { font-family: var(--font-mono); font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.reminder .txt { font-size: 14.5px; color: var(--text-1); line-height: 1.35; }
+.reminder .when { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-3); margin-top: 2px; }
 .reminder .pill {
   font-family: var(--font-mono); font-size: 9px;
   letter-spacing: 0.12em; text-transform: uppercase;

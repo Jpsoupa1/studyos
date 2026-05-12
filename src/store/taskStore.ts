@@ -76,6 +76,7 @@ interface TaskStore {
   isLoaded: boolean
   loadFromDB:            () => Promise<void>
   addTask:               (opts: AddTaskOptions) => Promise<Task>
+  updateTask:            (id: string, opts: AddTaskOptions) => Promise<void>
   toggleTask:            (id: string) => Promise<void>
   deleteTask:            (id: string) => Promise<void>
   addSubtask:            (taskId: string, text: string) => Promise<void>
@@ -116,6 +117,17 @@ export const useTaskStore = create<TaskStore>()(
         if (error) throw new Error(error.message)
         set({ tasks: [...get().tasks, task] })
         return task
+      },
+
+      updateTask: async (id, { text, category, priority, startDate, endDate, startTime, endTime, weekDays }) => {
+        const userId = await requireUID()
+        const tasks = get().tasks.map((t) => {
+          if (t.id !== id) return t
+          return { ...t, text, category, priority, startDate, endDate, startTime, endTime, weekDays }
+        })
+        const updated = tasks.find((t) => t.id === id)
+        if (updated) await supabase.from('tasks').update(taskToRow(updated, userId)).eq('id', id)
+        set({ tasks })
       },
 
       toggleTask: async (id) => {
