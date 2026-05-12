@@ -111,19 +111,55 @@ export async function fetchTodayEvents(token: string): Promise<CalendarEvent[]> 
 }
 
 // ─── Calendar: criar evento de task (com bloco de horário) ───────────────────
+
+// Mapeia WeekdayIndex (0=Dom…6=Sáb) para códigos RFC 5545 usados na RRULE
+const RFC_DAYS = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'] as const
+
+/**
+ * Encontra a primeira data ≥ startDate que cai em um dos weekDays.
+ * Garante que o DTSTART do evento recorrente seja a primeira ocorrência real.
+ */
+function firstOccurrenceDate(startDate: string, weekDays: number[]): string {
+  if (weekDays.length === 0) return startDate
+  const d = new Date(startDate + 'T12:00:00')
+  for (let i = 0; i < 7; i++) {
+    if (weekDays.includes(d.getDay())) return d.toISOString().split('T')[0]
+    d.setDate(d.getDate() + 1)
+  }
+  return startDate
+}
+
 export async function createCalendarEvent(token: string, task: Task): Promise<string> {
   const tz = localTimezone()
-  // Combina data (YYYY-MM-DD) + hora (HH:mm) no formato RFC 3339 exigido pela API
-  const startDateTime = `${task.startDate}T${task.startTime}:00`
-  const endDateTime   = `${task.endDate}T${task.endTime}:00`
 
-  const body = {
+  // O DTSTART deve ser a primeira ocorrência real da tarefa
+  const firstDate     = firstOccurrenceDate(task.startDate, task.weekDays)
+  const startDateTime = `${firstDate}T${task.startTime}:00`
+  const endDateTime   = `${firstDate}T${task.endTime}:00`   // mesmo dia — bloco de horário
+
+  const body: Record<string, unknown> = {
     summary:     task.text,
     description: `${task.category} · ${task.priority} · Criado pelo Study OS`,
     colorId:     categoryToColorId(task.category),
-    start:       { dateTime: startDateTime, timeZone: tz },
-    end:         { dateTime: endDateTime,   timeZone: tz },
+    start: { dateTime: startDateTime, timeZone: tz },
+    end:   { dateTime: endDateTime,   timeZone: tz },
   }
+
+  // Adiciona recorrência quando a tarefa abrange mais de um dia
+  if (task.startDate !== task.endDate) {
+    // UNTIL em UTC — inclui o último dia por inteiro
+    const until = task.endDate.replace(/-/g, '') + 'T235959Z'
+
+    if (task.weekDays.length === 0) {
+      // Sem restrição de dia → repete todo dia até endDate
+      body.recurrence = [`RRULE:FREQ=DAILY;UNTIL=${until}`]
+    } else {
+      // Dias específicos → repete semanalmente só nesses dias
+      const byDay = task.weekDays.map((d) => RFC_DAYS[d]).join(',')
+      body.recurrence = [`RRULE:FREQ=WEEKLY;BYDAY=${byDay};UNTIL=${until}`]
+    }
+  }
+
   const res = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
     method:  'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
