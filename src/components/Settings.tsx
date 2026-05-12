@@ -108,14 +108,6 @@ export default function Settings() {
           </div>
         )}
       </div>
-
-      {/* Variáveis de ambiente */}
-      <div className="tile" style={{ padding: '1.25rem' }}>
-        <div className="flex items-center gap-2 mb-4">
-          <Key size={15} style={{ color: 'var(--purple)' }} />
-          <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 14, color: 'var(--text-1)' }}>Configuração</h3>
-        </div>
-      </div>
     </div>
   )
 }
