@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Calendar, ChevronRight, Zap } from 'lucide-react'
-import { connectGoogle, getToken } from '@/services/google'
+import { connectGoogle } from '@/services/google'
 
 interface Props {
   onDone: () => void
