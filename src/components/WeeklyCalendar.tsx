@@ -80,48 +80,61 @@ function useIsMobile() {
 }
 
 // ─── Task Block ───────────────────────────────────────────────────────────
-function TaskBlock({ task, onClick }: { task: Task; onClick: (t: Task) => void }) {
-  const top     = topPx(task.startTime)
-  const height  = heightPx(task.startTime, task.endTime)
+interface TaskBlockProps {
+  task:    Task
+  top:     number
+  height:  number
+  width:   string
+  left:    string
+  onClick: (t: Task) => void
+}
+
+function TaskBlock({ task, top, height, width, left, onClick }: TaskBlockProps) {
   const color   = getCategoryColor(task.category)
   const bg      = getCategoryBg(task.category)
   const isTiny  = height < HOUR_PX * 0.38
   const isShort = height < HOUR_PX * 0.75
-
-  if (top < 0 || top > GRID_HEIGHT) return null
 
   return (
     <motion.div
       initial={{ opacity: 0, scaleY: 0.92 }}
       animate={{ opacity: 1, scaleY: 1 }}
       onClick={() => onClick(task)}
-      className="absolute overflow-hidden cursor-pointer select-none"
+      className="overflow-hidden cursor-pointer select-none"
       style={{
-        top:          `${top}px`,
-        height:       `${height}px`,
-        borderRadius: 8,
+        position:   'absolute',
+        top:        `${top}px`,
+        height:     `${height}px`,
+        width,
+        left,
+        borderRadius: 7,
         background:   bg,
         borderLeft:   `3px solid ${color}`,
-        padding:      isTiny ? '1px 6px' : isShort ? '3px 7px' : '5px 8px',
+        padding:      isTiny ? '1px 6px' : isShort ? '3px 7px' : '6px 8px',
         boxShadow:    `0 0 0 1px ${color}22, 0 2px 8px ${color}18`,
         transition:   'box-shadow 0.15s',
-        zIndex: 1,
+        zIndex: 2,
+        display:    'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        boxSizing: 'border-box',
       }}
       whileHover={{ boxShadow: `0 0 0 1.5px ${color}55, 0 4px 14px ${color}30`, zIndex: 10 }}
       transition={{ duration: 0.12 }}
     >
       {task.done && (
         <div className="absolute inset-0 flex items-center justify-center"
-          style={{ background: `${bg}D0`, borderRadius: 8 }}>
+          style={{ background: `${bg}D0`, borderRadius: 7 }}>
           <span style={{ fontSize: 13 }}>✅</span>
         </div>
       )}
-      <p className="text-xs font-semibold leading-tight truncate"
-        style={{ color, opacity: task.done ? 0.45 : 1 }}>
+      <p className="font-semibold leading-tight truncate"
+        style={{ fontSize: isTiny ? 9 : 11, color, opacity: task.done ? 0.45 : 1, margin: 0 }}>
         {task.text}
       </p>
-      {!isTiny && !isShort && (
-        <p className="text-[10px] mt-0.5 leading-tight opacity-75 truncate" style={{ color }}>
+      {!isTiny && (
+        <p className="leading-tight truncate"
+          style={{ fontSize: 9.5, color, opacity: task.done ? 0.3 : 0.65, marginTop: 2 }}>
           {task.startTime} – {task.endTime}
         </p>
       )}
@@ -192,7 +205,6 @@ export default function WeeklyCalendar({ onTaskClick, onSlotClick }: WeeklyCalen
   const tasksByDay  = weekDays.map((d) => tasksForDay(d.toISOString().split('T')[0]))
   const overlapMaps = tasksByDay.map(resolveOverlaps)
 
-  // Auto-select today and scroll to current time
   useEffect(() => {
     const idx = weekDays.findIndex((d) => d.toISOString().split('T')[0] === today)
     if (idx !== -1) setSelectedDay(idx)
@@ -283,12 +295,12 @@ export default function WeeklyCalendar({ onTaskClick, onSlotClick }: WeeklyCalen
       {/* ── Time grid ── */}
       <div ref={scrollRef} className="overflow-y-auto flex-1"
         style={{ maxHeight: isMobile ? 400 : 500 }}>
-        <div className="flex" style={{ height: GRID_HEIGHT + 16, position: 'relative' }}>
+        <div className="flex" style={{ height: `${GRID_HEIGHT}px`, position: 'relative' }}>
 
           {/* Time gutter */}
           <div style={{ width: TIME_COL_W, flexShrink: 0, position: 'relative', borderRight: '1px solid var(--line-soft)' }}>
             {HOURS.slice(0, -1).map((h) => (
-              <div key={h} style={{ height: HOUR_PX, display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', paddingRight: 8, paddingTop: 4 }}>
+              <div key={h} style={{ height: HOUR_PX, display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', paddingRight: 8, paddingTop: 4, boxSizing: 'border-box' }}>
                 <span style={{ fontSize: 9.5, color: 'var(--text-4)', fontFamily: 'var(--font-mono)', letterSpacing: '0.02em' }}>
                   {String(h).padStart(2, '0')}:00
                 </span>
@@ -303,33 +315,43 @@ export default function WeeklyCalendar({ onTaskClick, onSlotClick }: WeeklyCalen
             const isToday = iso === today
 
             return (
-              <div key={dayIdx} className="flex-1 min-w-0 relative"
-                style={{ borderLeft: '1px solid var(--line-soft)' }}
+              <div key={dayIdx}
+                className="flex-1 min-w-0"
+                style={{ position: 'relative', borderLeft: '1px solid var(--line-soft)', height: `${GRID_HEIGHT}px` }}
                 onClick={handleSlotClick}>
 
-                {/* Grid rows */}
+                {/* Grid rows — purely visual, não interferem no posicionamento das tasks */}
                 {HOURS.slice(0, -1).map((h) => (
                   <div key={h} style={{
-                    height: HOUR_PX,
+                    position: 'absolute',
+                    top:    `${(h - HOUR_START) * HOUR_PX}px`,
+                    left:   0,
+                    right:  0,
+                    height: `${HOUR_PX}px`,
                     borderBottom: '1px solid var(--line-soft)',
                     boxSizing: 'border-box',
+                    pointerEvents: 'none',
                   }}>
                     <div style={{ height: '50%', borderBottom: '1px dashed var(--line-soft)' }} />
                   </div>
                 ))}
 
-                {/* Now line — only in today's column */}
+                {/* Now line */}
                 {isToday && <NowLine />}
 
-                {/* Task blocks */}
+                {/* Task blocks — posicionados diretamente na coluna */}
                 {tasksByDay[dayIdx].map((task) => {
                   const layout = overlapMaps[dayIdx].get(task.id)
                   return (
-                    <div key={task.id} style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-                      <div style={{ position: 'absolute', width: layout?.width, left: layout?.left, top: 0, bottom: 0, pointerEvents: 'auto' }}>
-                        <TaskBlock task={task} onClick={(t) => onTaskClick?.(t)} />
-                      </div>
-                    </div>
+                    <TaskBlock
+                      key={task.id}
+                      task={task}
+                      top={topPx(task.startTime)}
+                      height={heightPx(task.startTime, task.endTime)}
+                      width={layout?.width ?? 'calc(100% - 8px)'}
+                      left={layout?.left ?? '4px'}
+                      onClick={(t) => onTaskClick?.(t)}
+                    />
                   )
                 })}
               </div>
