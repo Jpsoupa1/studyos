@@ -37,7 +37,8 @@ export default function ReminderPanel() {
   const handleDelete = async (id: string, calendarEventId?: string) => {
     const token = getToken()
     if (token && calendarEventId) {
-      deleteCalendarEvent(token, calendarEventId).catch(() => {})
+      deleteCalendarEvent(token, calendarEventId)
+        .catch((e) => console.warn('[StudyOS] Falha ao deletar lembrete do Calendar:', e))
     }
     await deleteReminder(id)
   }

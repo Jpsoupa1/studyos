@@ -202,10 +202,14 @@ export async function createAllDayCalendarEvent(token: string, reminder: Reminde
 
 // ─── Calendar: deletar evento ─────────────────────────────────────────────────
 export async function deleteCalendarEvent(token: string, eventId: string): Promise<void> {
-  await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${eventId}`, {
+  const res = await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${eventId}`, {
     method:  'DELETE',
     headers: { Authorization: `Bearer ${token}` },
   })
+  // 204 = sucesso sem corpo | 404 = evento já não existe (ok) | 410 = gone (ok)
+  if (res.status === 204 || res.status === 404 || res.status === 410) return
+  if (res.status === 401) { clearToken(); throw new Error('Token expirado — reconecte o Google Calendar em Config') }
+  throw new Error(`Calendar delete ${res.status}: ${await res.text()}`)
 }
 
 // ─── User info ────────────────────────────────────────────────────────────────
