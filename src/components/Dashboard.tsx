@@ -330,7 +330,7 @@ function WeeklyView({ onNewTaskAtTime, isMobile }: { onNewTaskAtTime: (t: string
 
 // ─── URL ↔ View mapping ───────────────────────────────────────────────────
 const VIEW_TO_PATH: Record<View, string> = {
-  dashboard:    '/',
+  dashboard:    '/painel',
   weekly:       '/calendario',
   tasks:        '/tarefas',
   reminders:    '/lembretes',
@@ -347,8 +347,13 @@ const PATH_TO_VIEW: Record<string, View> = Object.fromEntries(
 
 // ─── Main Dashboard ──────────────────────────────────────────────────────
 export default function Dashboard() {
-  const navigate   = useNavigate()
+  const navigate     = useNavigate()
   const { pathname } = useLocation()
+
+  // Redireciona / → /painel
+  useEffect(() => {
+    if (pathname === '/') navigate('/painel', { replace: true })
+  }, [pathname])
 
   const viewFromPath = PATH_TO_VIEW[pathname] ?? 'dashboard'
   const [collapsed,    setCollapsed]    = useState(false)
