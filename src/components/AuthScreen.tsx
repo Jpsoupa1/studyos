@@ -7,8 +7,8 @@ const AVATAR_COLORS = ['#D9B26A', '#7AB58A', '#7B9BC7', '#9890C2', '#C77878', '#
 // ─── Logo ─────────────────────────────────────────────────────────────────
 function Logo() {
   return (
-    <img src="/StudyOS_Transparente.png" alt="Study OS" width="88" height="88"
-      style={{ objectFit: 'contain', filter: 'drop-shadow(0 4px 16px rgba(45,139,106,0.35))' }} />
+    <img src="/icons.svg" alt="Study OS" width="110" height="110"
+      style={{ objectFit: 'contain', filter: 'drop-shadow(0 6px 20px rgba(45,139,106,0.40))' }} />
   )
 }
 

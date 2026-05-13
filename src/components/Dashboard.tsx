@@ -79,7 +79,7 @@ function Sidebar({ view, setView, collapsed, setCollapsed }: {
         ) : (
           <>
             <div className="brand-mark">
-              <img src="/StudyOS_Transparente.png" alt="Study OS" width="36" height="36"
+              <img src="/icons.svg" alt="Study OS" width="36" height="36"
                 style={{ objectFit: 'contain', borderRadius: 6 }} />
             </div>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="brand-text">

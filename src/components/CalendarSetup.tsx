@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Calendar, ChevronRight, Zap } from 'lucide-react'
+import { ChevronRight, Zap } from 'lucide-react'
 import { connectGoogle } from '@/services/google'
 
 interface Props {
@@ -41,14 +41,9 @@ export default function CalendarSetup({ onDone }: Props) {
         transition={{ duration: 0.35 }}
         className="w-full max-w-sm flex flex-col items-center gap-6"
       >
-        {/* Ícone */}
-        <div style={{
-          width: 72, height: 72, borderRadius: 18,
-          background: 'var(--bg-2)', border: '1px solid var(--line)',
-          display: 'grid', placeItems: 'center',
-        }}>
-          <Calendar size={32} color="var(--blue)" />
-        </div>
+        {/* Logo */}
+        <img src="/icons.svg" alt="Study OS" width="96" height="96"
+          style={{ objectFit: 'contain', filter: 'drop-shadow(0 4px 16px rgba(45,139,106,0.35))' }} />
 
         {/* Texto */}
         <div className="text-center flex flex-col gap-2">

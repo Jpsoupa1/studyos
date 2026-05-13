@@ -1,0 +1,30 @@
+{
+  "name": "Study OS",
+  "short_name": "Study OS",
+  "description": "Sistema de produtividade acadêmica",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1218",
+  "theme_color": "#2D8B6A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/StudyOS.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
