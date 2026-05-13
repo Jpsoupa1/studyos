@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useTaskStore } from '@/store/taskStore'
 import { useReminderStore } from '@/store/reminderStore'
 import { getToken, fetchCalendarChanges } from '@/services/google'
-import { supabase } from '@/lib/supabase'
+import { supabase, requireUID } from '@/lib/supabase'
 
 const POLL_INTERVAL_MS = 30 * 1000 // 30 segundos
 
@@ -31,6 +31,7 @@ export function useGoogleCalendarSync() {
         const changes = await fetchCalendarChanges(token)
         if (changes.length === 0) return
 
+        const userId = await requireUID()
         let needsReload = false
 
         for (const change of changes) {
@@ -38,7 +39,7 @@ export function useGoogleCalendarSync() {
           const task = tasksRef.current.find((t) => t.calendarEventId === change.id)
           if (task) {
             if (change.status === 'cancelled') {
-              await supabase.from('tasks').delete().eq('id', task.id)
+              await supabase.from('tasks').delete().eq('id', task.id).eq('user_id', userId)
               needsReload = true
               continue
             }
@@ -83,7 +84,7 @@ export function useGoogleCalendarSync() {
           // ── Verifica se é um lembrete criado pelo StudyOS ─────────────────────
           const reminder = remindersRef.current.find((r) => r.calendarEventId === change.id)
           if (reminder && change.status === 'cancelled') {
-            await supabase.from('reminders').delete().eq('id', reminder.id)
+            await supabase.from('reminders').delete().eq('id', reminder.id).eq('user_id', userId)
             needsReload = true
           }
         }

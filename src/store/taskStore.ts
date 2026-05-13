@@ -98,9 +98,11 @@ export const useTaskStore = create<TaskStore>()(
 
       loadFromDB: async () => {
         set({ tasks: [], isLoaded: false })
+        const userId = await requireUID()
         const { data, error } = await supabase
           .from('tasks')
           .select('*')
+          .eq('user_id', userId)           // filtro explícito — defesa além do RLS
           .order('order', { ascending: true })
         if (error) { console.error('[tasks] load:', error.message); set({ isLoaded: true }); return }
         set({ tasks: (data ?? []).map(rowToTask), isLoaded: true })
@@ -143,7 +145,9 @@ export const useTaskStore = create<TaskStore>()(
       },
 
       deleteTask: async (id) => {
-        await supabase.from('tasks').delete().eq('id', id)
+        const userId = await requireUID()
+        // Deleta apenas se pertencer ao usuário autenticado (dupla proteção além do RLS)
+        await supabase.from('tasks').delete().eq('id', id).eq('user_id', userId)
         set({ tasks: get().tasks.filter((t) => t.id !== id) })
       },
 

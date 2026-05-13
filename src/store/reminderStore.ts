@@ -48,9 +48,11 @@ export const useReminderStore = create<ReminderStore>()((set, get) => ({
 
   loadFromDB: async () => {
     set({ reminders: [], isLoaded: false })
+    const userId = await requireUID()
     const { data, error } = await supabase
       .from('reminders')
       .select('*')
+      .eq('user_id', userId)               // filtro explícito — defesa além do RLS
       .order('due_date', { ascending: true })
     if (error) { console.error('[reminders] load:', error.message); set({ isLoaded: true }); return }
     set({ reminders: (data ?? []).map(rowToReminder), isLoaded: true })
@@ -84,7 +86,8 @@ export const useReminderStore = create<ReminderStore>()((set, get) => ({
   },
 
   deleteReminder: async (id) => {
-    await supabase.from('reminders').delete().eq('id', id)
+    const userId = await requireUID()
+    await supabase.from('reminders').delete().eq('id', id).eq('user_id', userId)
     set({ reminders: get().reminders.filter((r) => r.id !== id) })
   },
 

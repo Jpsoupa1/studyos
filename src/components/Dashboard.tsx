@@ -24,6 +24,7 @@ import Stats from './Stats'
 import DailyChecklist from './DailyChecklist'
 import Achievements from './Achievements'
 import Settings from './Settings'
+import NotFound from './NotFound'
 import Button from './ui/Button'
 
 type View = 'dashboard' | 'weekly' | 'tasks' | 'reminders' | 'pomodoro' | 'calendar' | 'coach' | 'stats' | 'achievements' | 'settings'
@@ -355,7 +356,11 @@ export default function Dashboard() {
     if (pathname === '/') navigate('/painel', { replace: true })
   }, [pathname])
 
+  // Rota desconhecida → 404
+  const isKnownPath = pathname === '/' || pathname in PATH_TO_VIEW
   const viewFromPath = PATH_TO_VIEW[pathname] ?? 'dashboard'
+
+  if (!isKnownPath) return <NotFound />
   const [collapsed,    setCollapsed]    = useState(false)
   const [taskFormOpen, setTaskFormOpen] = useState(false)
   const [defaultStart, setDefaultStart] = useState<string | undefined>()
