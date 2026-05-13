@@ -28,7 +28,7 @@ import Button from './ui/Button'
 type View = 'dashboard' | 'weekly' | 'tasks' | 'reminders' | 'pomodoro' | 'calendar' | 'coach' | 'stats' | 'achievements' | 'settings'
 
 const NAV: { id: View; label: string; icon: React.ElementType }[] = [
-  { id: 'dashboard',    label: 'Dashboard',     icon: LayoutDashboard },
+  { id: 'dashboard',    label: 'Painel',         icon: LayoutDashboard },
   { id: 'weekly',       label: 'Calendário',    icon: CalendarRange   },
   { id: 'tasks',        label: 'Tarefas',       icon: CheckSquare     },
   { id: 'reminders',    label: 'Lembretes',     icon: Bell            },
@@ -71,11 +71,8 @@ function Sidebar({ view, setView, collapsed, setCollapsed }: {
       {/* Brand */}
       <div className="brand">
         <div className="brand-mark">
-          <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="13" stroke="var(--text-2)" strokeWidth="1.25" fill="none" opacity="0.55"/>
-            <path d="M 8 21 A 13 13 0 0 0 28 21" stroke="var(--amber)" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-            <circle cx="18" cy="18" r="1.6" fill="var(--amber)"/>
-          </svg>
+          <img src="/StudyOS_Transparente.png" alt="Study OS" width="36" height="36"
+            style={{ objectFit: 'contain', borderRadius: 6 }} />
         </div>
         <AnimatePresence>
           {!collapsed && (
@@ -96,8 +93,14 @@ function Sidebar({ view, setView, collapsed, setCollapsed }: {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="profile">
             <div className="profile-row">
+              <div className="avatar" style={{ background: 'linear-gradient(135deg, var(--green) 0%, #1A5C45 100%)', color: '#E4EDF5' }}>
+                {profile?.name ? profile.name.slice(0, 2).toUpperCase() : 'US'}
+              </div>
               <div style={{ minWidth: 0 }}>
                 <div className="profile-name">{profile?.name || 'Usuário'}</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-4)', letterSpacing: '0.1em', marginTop: 2 }}>
+                  {profile?.course || 'Estudante'}
+                </div>
               </div>
             </div>
             <div className="profile-stats">

@@ -4,15 +4,11 @@ import { useAuthStore } from '@/store/authStore'
 
 const AVATAR_COLORS = ['#D9B26A', '#7AB58A', '#7B9BC7', '#9890C2', '#C77878', '#A8A8B8']
 
-// ─── Logo SVG terminal ─────────────────────────────────────────────────────
+// ─── Logo ─────────────────────────────────────────────────────────────────
 function Logo() {
   return (
-    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-      <rect width="56" height="56" rx="14" fill="var(--card)" stroke="var(--line)" strokeWidth="1" />
-      <circle cx="28" cy="28" r="14" stroke="var(--text-2)" strokeWidth="1.4" fill="none" opacity="0.5" />
-      <path d="M 14 32 A 14 14 0 0 0 42 32" stroke="var(--amber)" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      <circle cx="28" cy="28" r="2" fill="var(--amber)" />
-    </svg>
+    <img src="/StudyOS_Transparente.png" alt="Study OS" width="88" height="88"
+      style={{ objectFit: 'contain', filter: 'drop-shadow(0 4px 16px rgba(45,139,106,0.35))' }} />
   )
 }
 

@@ -258,54 +258,54 @@ select:focus-visible {
   .show-tablet-flex { display: flex !important; }
 }
 
-/* ─── Dark mode — Terminal Editorial ─────────────────────────────────────── */
+/* ─── Dark mode — Study OS Green ─────────────────────────────────────────── */
 :root[data-theme="dark"] {
-  /* Surfaces */
-  --bg:           #101015;
-  --bg-2:         #15151B;
-  --surface:      #17171F;
-  --sidebar:      #15151B;
-  --card:         #1B1B24;
-  --card-hi:      #1F1F29;
-  --border:       #25252F;
-  --border-2:     #2F2F3D;
-  --line:         #25252F;
-  --line-soft:    #1E1E27;
+  /* Surfaces — teal-black, inspirado na logo */
+  --bg:           #0B1218;
+  --bg-2:         #0F1A24;
+  --surface:      #111E28;
+  --sidebar:      #0D1820;
+  --card:         #142232;
+  --card-hi:      #192B3C;
+  --border:       #1E3545;
+  --border-2:     #254055;
+  --line:         #1C3040;
+  --line-soft:    #142838;
 
   /* Text */
-  --text-1:       #E8E8F0;
-  --text-2:       #A8A8B8;
-  --text-3:       #76768A;
-  --text-4:       #4A4A5A;
+  --text-1:       #E4EDF5;
+  --text-2:       #8AAABB;
+  --text-3:       #4E7080;
+  --text-4:       #2E4858;
 
-  /* Accents — desaturated terminal palette */
-  --accent:       #9890C2;
-  --accent-soft:  rgba(152,144,194,0.08);
-  --amber:        #D9B26A;
-  --amber-soft:   rgba(217,178,106,0.08);
-  --amber-line:   rgba(217,178,106,0.22);
-  --emerald:      #7AB58A;
-  --emerald-soft: rgba(122,181,138,0.06);
-  --green:        #7AB58A;
-  --green-soft:   rgba(122,181,138,0.06);
-  --rose:         #C77878;
-  --rose-soft:    rgba(199,120,120,0.07);
-  --red:          #C77878;
-  --red-soft:     rgba(199,120,120,0.07);
-  --sky:          #7B9BC7;
-  --sky-soft:     rgba(123,155,199,0.06);
-  --blue:         #7B9BC7;
-  --blue-soft:    rgba(123,155,199,0.06);
-  --violet:       #9890C2;
-  --violet-soft:  rgba(152,144,194,0.08);
-  --purple:       #9890C2;
-  --purple-soft:  rgba(152,144,194,0.08);
+  /* Accents — verde/dourado da logo */
+  --accent:       #2D8B6A;
+  --accent-soft:  rgba(45,139,106,0.10);
+  --amber:        #C9A54A;   /* dourado da logo */
+  --amber-soft:   rgba(201,165,74,0.10);
+  --amber-line:   rgba(201,165,74,0.25);
+  --emerald:      #2D8B6A;
+  --emerald-soft: rgba(45,139,106,0.10);
+  --green:        #2D8B6A;   /* teal primário da logo */
+  --green-soft:   rgba(45,139,106,0.10);
+  --rose:         #C06060;
+  --rose-soft:    rgba(192,96,96,0.09);
+  --red:          #C06060;
+  --red-soft:     rgba(192,96,96,0.09);
+  --sky:          #4A90B8;
+  --sky-soft:     rgba(74,144,184,0.09);
+  --blue:         #4A90B8;
+  --blue-soft:    rgba(74,144,184,0.09);
+  --violet:       #7A6FAA;
+  --violet-soft:  rgba(122,111,170,0.09);
+  --purple:       #7A6FAA;
+  --purple-soft:  rgba(122,111,170,0.09);
 
-  --shadow-xs: 0 1px 2px rgba(0,0,0,0.40);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.40), 0 1px 2px rgba(0,0,0,0.30);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.50), 0 4px 16px rgba(0,0,0,0.35);
-  --shadow-lg: 0 4px 12px rgba(0,0,0,0.50), 0 8px 32px rgba(0,0,0,0.35);
-  --shadow-xl: 0 8px 24px rgba(0,0,0,0.60), 0 16px 48px rgba(0,0,0,0.45);
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.50);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.50), 0 1px 2px rgba(0,0,0,0.40);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.60), 0 4px 16px rgba(0,0,0,0.45);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.60), 0 8px 32px rgba(0,0,0,0.45);
+  --shadow-xl: 0 8px 24px rgba(0,0,0,0.70), 0 16px 48px rgba(0,0,0,0.55);
 }
 
 [data-theme="dark"] .glass-overlay {

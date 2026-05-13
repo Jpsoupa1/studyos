@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Key, User, Calendar } from 'lucide-react'
+import { User, Calendar } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
 import { connectGoogle, getToken, clearToken, clearCalendarSyncToken } from '@/services/google'
 import Button from './ui/Button'

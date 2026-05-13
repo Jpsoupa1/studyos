@@ -1,9 +1,68 @@
 import { motion } from 'framer-motion'
-import { CalendarCheck2, Circle, CheckCircle2 } from 'lucide-react'
+import { CalendarCheck2, Circle, CheckCircle2, AlertTriangle, Clock } from 'lucide-react'
 import { useTaskStore } from '@/store/taskStore'
 import { useUserStore } from '@/store/userStore'
 import { daysUntil, taskOccursOn } from '@/types'
 import { todayISO, getCategoryColor, formatTimeRange } from '@/lib/utils'
+
+// ─── Donut chart circular ─────────────────────────────────────────────────
+function DonutKPI({
+  value, total, label, color, icon,
+}: {
+  value: number; total?: number; label: string; color: string; icon?: React.ReactNode
+}) {
+  const pct = total ? Math.round((value / total) * 100) : 0
+  const size = 72
+  const stroke = 6
+  const r = (size - stroke) / 2
+  const circ = 2 * Math.PI * r
+  const offset = circ - (pct / 100) * circ
+
+  return (
+    <motion.div className="kpi" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '20px 12px' }}>
+      <div className="kpi-label" style={{ color, justifyContent: 'center' }}>
+        <span className="dot" />{label}
+      </div>
+      <div style={{ position: 'relative', width: size, height: size }}>
+        <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+          {/* Track */}
+          <circle cx={size / 2} cy={size / 2} r={r} fill="none"
+            stroke={color} strokeOpacity={0.12} strokeWidth={stroke} />
+          {/* Progress */}
+          {total ? (
+            <circle cx={size / 2} cy={size / 2} r={r} fill="none"
+              stroke={color} strokeWidth={stroke}
+              strokeDasharray={`${circ}`} strokeDashoffset={`${offset}`}
+              strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.6s ease' }} />
+          ) : null}
+        </svg>
+        <div style={{
+          position: 'absolute', inset: 0, display: 'flex',
+          flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        }}>
+          {icon ?? (
+            <>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 20, fontWeight: 700, color, lineHeight: 1 }}>
+                {value}
+              </span>
+              {total !== undefined && (
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-4)', marginTop: 1 }}>
+                  / {total}
+                </span>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+      {total !== undefined && (
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-4)', letterSpacing: '0.1em' }}>
+          {pct}%
+        </span>
+      )}
+    </motion.div>
+  )
+}
 
 export default function TasksOverview() {
   const { tasks, toggleTask } = useTaskStore()
@@ -12,17 +71,11 @@ export default function TasksOverview() {
 
   const total    = tasks.length
   const done     = tasks.filter((t) => t.done).length
+  const inProg   = tasks.filter((t) => !t.done && daysUntil(t.endDate) >= 0).length
   const overdue  = tasks.filter((t) => !t.done && daysUntil(t.endDate) < 0).length
   const dueToday = tasks.filter((t) => !t.done && taskOccursOn(t, today)).length
 
-  const kpiData = [
-    { label: 'Concluídas hoje', value: String(done),                       total: `/ ${total}`, color: 'var(--green)',  barPct: total ? Math.round((done / total) * 100) : 0 },
-    { label: 'Em progresso',    value: String(total - done - overdue),      total: `/ ${total}`, color: 'var(--blue)',   barPct: total ? Math.round(((total - done - overdue) / total) * 100) : 0 },
-    { label: 'Atrasadas',       value: String(overdue),                                          color: 'var(--red)',   barPct: total ? Math.round((overdue / total) * 100) : 0 },
-    { label: 'Foco · hoje',     value: String(dueToday),                                         color: 'var(--amber)', barPct: 0, target: 'prazo hoje' },
-  ]
-
-  // Tarefas de hoje — usa taskOccursOn para incluir recorrentes
+  // Tarefas de hoje
   const todayTasks = tasks
     .filter((t) => taskOccursOn(t, today))
     .sort((a, b) => {
@@ -37,25 +90,34 @@ export default function TasksOverview() {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* KPI strip */}
-      <div className="kpis">
-        {kpiData.map((k, i) => (
-          <motion.div key={k.label} className="kpi"
-            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}>
-            <div className="kpi-label" style={{ color: k.color }}>
-              <span className="dot"></span>{k.label}
+      {/* KPI strip — donut charts */}
+      <div className="kpis" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        <DonutKPI label="Concluídas hoje" value={done}    total={total}  color="var(--green)" />
+        <DonutKPI label="Em progresso"    value={inProg}  total={total}  color="var(--blue)"  />
+        <DonutKPI label="Atrasadas"       value={overdue} color="var(--red)"
+          icon={
+            overdue > 0 ? (
+              <div style={{ textAlign: 'center' }}>
+                <AlertTriangle size={18} color="var(--red)" />
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 700, color: 'var(--red)', lineHeight: 1, marginTop: 2 }}>
+                  {overdue}
+                </div>
+              </div>
+            ) : (
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 20, fontWeight: 700, color: 'var(--green)', lineHeight: 1 }}>0</span>
+            )
+          }
+        />
+        <DonutKPI label="Foco · hoje" value={dueToday} color="var(--amber)"
+          icon={
+            <div style={{ textAlign: 'center' }}>
+              <Clock size={16} color="var(--amber)" />
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 700, color: 'var(--amber)', lineHeight: 1, marginTop: 2 }}>
+                {dueToday}
+              </div>
             </div>
-            <div className="kpi-value">
-              <span>{k.value}</span>
-              {k.total && <span className="total">{k.total}</span>}
-            </div>
-            <div className="kpi-bar"><div style={{ width: k.barPct + '%', background: k.color }}></div></div>
-            <div className="kpi-meta">
-              <span>{k.barPct}%</span>
-              <span>{k.target ?? 'meta diária'}</span>
-            </div>
-          </motion.div>
-        ))}
+          }
+        />
       </div>
 
       {/* Tarefas de hoje */}
@@ -88,24 +150,21 @@ export default function TasksOverview() {
                   transition={{ delay: i * 0.04 }}
                   style={{ borderLeft: `3px solid ${catColor}` }}
                   onClick={() => void handleToggle(task.id, task.done)}>
-
                   <div className="task-check" style={{ borderColor: catColor + '60' }}>
                     {task.done
                       ? <CheckCircle2 size={14} color={catColor} />
                       : <Circle size={14} color={catColor + '80'} />}
                   </div>
-
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div className="task-title">{task.text}</div>
                     <div className="task-meta">
                       <span className="cat" style={{ borderColor: catColor + '40', color: catColor }}>{task.category}</span>
                       <span>{formatTimeRange(task.startTime, task.endTime)}</span>
                       {task.weekDays.length > 0 && (
-                        <span style={{ color: 'var(--blue)' }}>↻ recorrente</span>
+                        <span style={{ color: 'var(--blue)' }}>↻ Recorrente</span>
                       )}
                     </div>
                   </div>
-
                   <span className={`task-pri ${task.priority.toLowerCase()}`}>{task.priority}</span>
                 </motion.div>
               )
