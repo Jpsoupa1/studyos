@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   LayoutDashboard, CheckSquare, Timer, Calendar,
@@ -69,22 +70,26 @@ function Sidebar({ view, setView, collapsed, setCollapsed }: {
       className="sidebar flex-shrink-0"
     >
       {/* Brand */}
-      <div className="brand">
-        <div className="brand-mark">
-          <img src="/StudyOS_Transparente.png" alt="Study OS" width="36" height="36"
-            style={{ objectFit: 'contain', borderRadius: 6 }} />
-        </div>
-        <AnimatePresence>
-          {!collapsed && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="brand-text">
+      <div className="brand" style={{ padding: collapsed ? '16px 0' : undefined, justifyContent: collapsed ? 'center' : undefined }}>
+        {collapsed ? (
+          /* Collapsed: apenas botão de toggle centralizado */
+          <button onClick={() => setCollapsed(false)} className="icon-btn" title="Abrir menu">
+            <Menu size={14} />
+          </button>
+        ) : (
+          <>
+            <div className="brand-mark">
+              <img src="/StudyOS_Transparente.png" alt="Study OS" width="36" height="36"
+                style={{ objectFit: 'contain', borderRadius: 6 }} />
+            </div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="brand-text">
               <div className="brand-name">Study OS</div>
             </motion.div>
-          )}
-        </AnimatePresence>
-        <button onClick={() => setCollapsed(!collapsed)}
-          className="icon-btn flex-shrink-0" style={{ marginLeft: 'auto' }}>
-          {collapsed ? <Menu size={12} /> : <X size={12} />}
-        </button>
+            <button onClick={() => setCollapsed(true)} className="icon-btn flex-shrink-0" style={{ marginLeft: 'auto' }} title="Fechar menu">
+              <X size={12} />
+            </button>
+          </>
+        )}
       </div>
 
       {/* Profile */}
@@ -323,13 +328,36 @@ function WeeklyView({ onNewTaskAtTime, isMobile }: { onNewTaskAtTime: (t: string
   )
 }
 
+// ─── URL ↔ View mapping ───────────────────────────────────────────────────
+const VIEW_TO_PATH: Record<View, string> = {
+  dashboard:    '/',
+  weekly:       '/calendario',
+  tasks:        '/tarefas',
+  reminders:    '/lembretes',
+  pomodoro:     '/pomodoro',
+  calendar:     '/agenda',
+  coach:        '/coach',
+  stats:        '/stats',
+  achievements: '/conquistas',
+  settings:     '/config',
+}
+const PATH_TO_VIEW: Record<string, View> = Object.fromEntries(
+  Object.entries(VIEW_TO_PATH).map(([v, p]) => [p, v as View])
+)
+
 // ─── Main Dashboard ──────────────────────────────────────────────────────
 export default function Dashboard() {
-  const [view,         setView]         = useState<View>('dashboard')
+  const navigate   = useNavigate()
+  const { pathname } = useLocation()
+
+  const viewFromPath = PATH_TO_VIEW[pathname] ?? 'dashboard'
   const [collapsed,    setCollapsed]    = useState(false)
   const [taskFormOpen, setTaskFormOpen] = useState(false)
   const [defaultStart, setDefaultStart] = useState<string | undefined>()
   const [moreOpen,     setMoreOpen]     = useState(false)
+
+  const view    = viewFromPath
+  const setView = (v: View) => navigate(VIEW_TO_PATH[v])
 
   const { isMobile, isTablet } = useBreakpoint()
 

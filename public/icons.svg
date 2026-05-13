@@ -1,24 +1,248 @@
-<svg xmlns="http://www.w3.org/2000/svg">
-  <symbol id="bluesky-icon" viewBox="0 0 16 17">
-    <g clip-path="url(#bluesky-clip)"><path fill="#08060d" d="M7.75 7.735c-.693-1.348-2.58-3.86-4.334-5.097-1.68-1.187-2.32-.981-2.74-.79C.188 2.065.1 2.812.1 3.251s.241 3.602.398 4.13c.52 1.744 2.367 2.333 4.07 2.145-2.495.37-4.71 1.278-1.805 4.512 3.196 3.309 4.38-.71 4.987-2.746.608 2.036 1.307 5.91 4.93 2.746 2.72-2.746.747-4.143-1.747-4.512 1.702.189 3.55-.4 4.07-2.145.156-.528.397-3.691.397-4.13s-.088-1.186-.575-1.406c-.42-.19-1.06-.395-2.741.79-1.755 1.24-3.64 3.752-4.334 5.099"/></g>
-    <defs><clipPath id="bluesky-clip"><path fill="#fff" d="M.1.85h15.3v15.3H.1z"/></clipPath></defs>
-  </symbol>
-  <symbol id="discord-icon" viewBox="0 0 20 19">
-    <path fill="#08060d" d="M16.224 3.768a14.5 14.5 0 0 0-3.67-1.153c-.158.286-.343.67-.47.976a13.5 13.5 0 0 0-4.067 0c-.128-.306-.317-.69-.476-.976A14.4 14.4 0 0 0 3.868 3.77C1.546 7.28.916 10.703 1.231 14.077a14.7 14.7 0 0 0 4.5 2.306q.545-.748.965-1.587a9.5 9.5 0 0 1-1.518-.74q.191-.14.372-.293c2.927 1.369 6.107 1.369 8.999 0q.183.152.372.294-.723.437-1.52.74.418.838.963 1.588a14.6 14.6 0 0 0 4.504-2.308c.37-3.911-.63-7.302-2.644-10.309m-9.13 8.234c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.894 0 1.614.82 1.599 1.82.001 1-.705 1.82-1.6 1.82m5.91 0c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.893 0 1.614.82 1.599 1.82 0 1-.706 1.82-1.6 1.82"/>
-  </symbol>
-  <symbol id="documentation-icon" viewBox="0 0 21 20">
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="m15.5 13.333 1.533 1.322c.645.555.967.833.967 1.178s-.322.623-.967 1.179L15.5 18.333m-3.333-5-1.534 1.322c-.644.555-.966.833-.966 1.178s.322.623.966 1.179l1.534 1.321"/>
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M17.167 10.836v-4.32c0-1.41 0-2.117-.224-2.68-.359-.906-1.118-1.621-2.08-1.96-.599-.21-1.349-.21-2.848-.21-2.623 0-3.935 0-4.983.369-1.684.591-3.013 1.842-3.641 3.428C3 6.449 3 7.684 3 10.154v2.122c0 2.558 0 3.838.706 4.726q.306.383.713.671c.76.536 1.79.64 3.581.66"/>
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M3 10a2.78 2.78 0 0 1 2.778-2.778c.555 0 1.209.097 1.748-.047.48-.129.854-.503.982-.982.145-.54.048-1.194.048-1.749a2.78 2.78 0 0 1 2.777-2.777"/>
-  </symbol>
-  <symbol id="github-icon" viewBox="0 0 19 19">
-    <path fill="#08060d" fill-rule="evenodd" d="M9.356 1.85C5.05 1.85 1.57 5.356 1.57 9.694a7.84 7.84 0 0 0 5.324 7.44c.387.079.528-.168.528-.376 0-.182-.013-.805-.013-1.454-2.165.467-2.616-.935-2.616-.935-.349-.91-.864-1.143-.864-1.143-.71-.48.051-.48.051-.48.787.051 1.2.805 1.2.805.695 1.194 1.817.857 2.268.649.064-.507.27-.857.49-1.052-1.728-.182-3.545-.857-3.545-3.87 0-.857.31-1.558.8-2.104-.078-.195-.349-1 .077-2.078 0 0 .657-.208 2.14.805a7.5 7.5 0 0 1 1.946-.26c.657 0 1.328.092 1.946.26 1.483-1.013 2.14-.805 2.14-.805.426 1.078.155 1.883.078 2.078.502.546.799 1.247.799 2.104 0 3.013-1.818 3.675-3.558 3.87.284.247.528.714.528 1.454 0 1.052-.012 1.896-.012 2.156 0 .208.142.455.528.377a7.84 7.84 0 0 0 5.324-7.441c.013-4.338-3.48-7.844-7.773-7.844" clip-rule="evenodd"/>
-  </symbol>
-  <symbol id="social-icon" viewBox="0 0 20 20">
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M12.5 6.667a4.167 4.167 0 1 0-8.334 0 4.167 4.167 0 0 0 8.334 0"/>
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M2.5 16.667a5.833 5.833 0 0 1 8.75-5.053m3.837.474.513 1.035c.07.144.257.282.414.309l.93.155c.596.1.736.536.307.965l-.723.73a.64.64 0 0 0-.152.531l.207.903c.164.715-.213.991-.84.618l-.872-.52a.63.63 0 0 0-.577 0l-.872.52c-.624.373-1.003.094-.84-.618l.207-.903a.64.64 0 0 0-.152-.532l-.723-.729c-.426-.43-.289-.864.306-.964l.93-.156a.64.64 0 0 0 .412-.31l.513-1.034c.28-.562.735-.562 1.012 0"/>
-  </symbol>
-  <symbol id="x-icon" viewBox="0 0 19 19">
-    <path fill="#08060d" fill-rule="evenodd" d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8zm1.782.91 8.078 11.294c.772 1.08 1.413 1.973 1.425 1.984.016.017.241.02 1.05.017l1.03-.004-2.694-3.766L7.796 5.75 5.722 2.852l-1.039-.004-1.039-.004z" clip-rule="evenodd"/>
-  </symbol>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="ic-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7d878"/>
+      <stop offset="45%" style="stop-color:#d4a030"/>
+      <stop offset="100%" style="stop-color:#a06818"/>
+    </linearGradient>
+    <linearGradient id="ic-goldV" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffe898"/>
+      <stop offset="50%" style="stop-color:#d4a030"/>
+      <stop offset="100%" style="stop-color:#9a6010"/>
+    </linearGradient>
+    <linearGradient id="ic-teal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22a8a8"/>
+      <stop offset="100%" style="stop-color:#0b5858"/>
+    </linearGradient>
+    <linearGradient id="ic-tealDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0e6868"/>
+      <stop offset="100%" style="stop-color:#083838"/>
+    </linearGradient>
+    <radialGradient id="ic-eye" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" style="stop-color:#20a0a0"/>
+      <stop offset="100%" style="stop-color:#093838"/>
+    </radialGradient>
+    <radialGradient id="ic-hexFill" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" style="stop-color:#104848"/>
+      <stop offset="100%" style="stop-color:#072828"/>
+    </radialGradient>
+
+    <!-- Filters -->
+    <filter id="ic-drop" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+    <filter id="ic-glow">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#d4a030" flood-opacity="0.7"/>
+    </filter>
+    <filter id="ic-eyeGlow">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#20c0c0" flood-opacity="0.5"/>
+    </filter>
+    <filter id="ic-textShadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- ═══════════════════════════════════════
+       HEXAGON FRAME
+  ═══════════════════════════════════════ -->
+
+  <!-- Hexagon outer shadow layer -->
+  <polygon points="256,38 388,113 388,263 256,338 124,263 124,113"
+    fill="#000" opacity="0.3" transform="translate(5,8)"/>
+
+  <!-- Hexagon main fill -->
+  <polygon points="256,38 388,113 388,263 256,338 124,263 124,113"
+    fill="url(#ic-hexFill)" filter="url(#ic-drop)"/>
+
+  <!-- Hexagon outer gold border -->
+  <polygon points="256,38 388,113 388,263 256,338 124,263 124,113"
+    fill="none" stroke="url(#ic-gold)" stroke-width="9" filter="url(#ic-glow)"/>
+
+  <!-- Hexagon inner thin border -->
+  <polygon points="256,52 374,120 374,252 256,320 138,252 138,120"
+    fill="none" stroke="#d4a030" stroke-width="2" opacity="0.45"/>
+
+  <!-- ── Corner accent gems ── -->
+  <circle cx="256" cy="38"  r="7" fill="url(#ic-gold)" filter="url(#ic-glow)"/>
+  <circle cx="388" cy="113" r="7" fill="url(#ic-gold)" filter="url(#ic-glow)"/>
+  <circle cx="388" cy="263" r="7" fill="url(#ic-gold)" filter="url(#ic-glow)"/>
+  <circle cx="256" cy="338" r="7" fill="url(#ic-gold)" filter="url(#ic-glow)"/>
+  <circle cx="124" cy="263" r="7" fill="url(#ic-gold)" filter="url(#ic-glow)"/>
+  <circle cx="124" cy="113" r="7" fill="url(#ic-gold)" filter="url(#ic-glow)"/>
+
+  <!-- ── Top crown ornament ── -->
+  <rect x="234" y="24" width="44" height="14" rx="4" fill="url(#ic-goldV)"/>
+  <rect x="244" y="14" width="24" height="12" rx="3" fill="url(#ic-goldV)"/>
+  <polygon points="256,6 263,16 249,16" fill="#f7d878"/>
+  <!-- Crown gems row -->
+  <circle cx="244" cy="31" r="3" fill="#fffbe0" opacity="0.7"/>
+  <circle cx="256" cy="31" r="4" fill="#fffbe0" opacity="0.85"/>
+  <circle cx="268" cy="31" r="3" fill="#fffbe0" opacity="0.7"/>
+
+  <!-- ── Side filigree scrollwork ── -->
+  <!-- Left -->
+  <path d="M138,140 Q122,160 134,182 Q146,204 130,226 Q118,245 134,262"
+    fill="none" stroke="#d4a030" stroke-width="2" opacity="0.55" stroke-linecap="round"/>
+  <path d="M148,150 Q136,168 144,186 Q152,204 142,220"
+    fill="none" stroke="#d4a030" stroke-width="1.2" opacity="0.35" stroke-linecap="round"/>
+  <circle cx="130" cy="182" r="3" fill="#d4a030" opacity="0.5"/>
+  <!-- Right -->
+  <path d="M374,140 Q390,160 378,182 Q366,204 382,226 Q394,245 378,262"
+    fill="none" stroke="#d4a030" stroke-width="2" opacity="0.55" stroke-linecap="round"/>
+  <path d="M364,150 Q376,168 368,186 Q360,204 370,220"
+    fill="none" stroke="#d4a030" stroke-width="1.2" opacity="0.35" stroke-linecap="round"/>
+  <circle cx="382" cy="182" r="3" fill="#d4a030" opacity="0.5"/>
+
+  <!-- ═══════════════════════════════════════
+       OWL BODY
+  ═══════════════════════════════════════ -->
+
+  <!-- Wing shadow hints -->
+  <path d="M170,225 Q182,205 198,218 Q184,238 170,248 Z" fill="#0a4040" opacity="0.8"/>
+  <path d="M342,225 Q330,205 314,218 Q328,238 342,248 Z" fill="#0a4040" opacity="0.8"/>
+
+  <!-- Main body oval -->
+  <ellipse cx="256" cy="210" rx="88" ry="98" fill="url(#ic-teal)" filter="url(#ic-drop)"/>
+
+  <!-- Chest lighter belly -->
+  <ellipse cx="256" cy="222" rx="44" ry="62" fill="#0e7070" opacity="0.7"/>
+  <!-- Belly ring detail -->
+  <ellipse cx="256" cy="226" rx="30" ry="46" fill="none" stroke="#d4a030" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Feather texture lines (subtle) -->
+  <path d="M220,200 Q230,195 240,200 Q230,210 220,215 Z" fill="#0b5858" opacity="0.4"/>
+  <path d="M292,200 Q282,195 272,200 Q282,210 292,215 Z" fill="#0b5858" opacity="0.4"/>
+  <path d="M215,230 Q226,224 236,230 Q226,241 215,246 Z" fill="#0b5858" opacity="0.3"/>
+  <path d="M297,230 Q286,224 276,230 Q286,241 297,246 Z" fill="#0b5858" opacity="0.3"/>
+
+  <!-- ── EAR TUFTS ── -->
+  <!-- Left tuft -->
+  <polygon points="218,122 204,86 238,114" fill="url(#ic-teal)"/>
+  <polygon points="218,122 206,90 234,112" fill="none" stroke="#d4a030" stroke-width="2"/>
+  <!-- Right tuft -->
+  <polygon points="294,122 308,86 274,114" fill="url(#ic-teal)"/>
+  <polygon points="294,122 306,90 278,112" fill="none" stroke="#d4a030" stroke-width="2"/>
+
+  <!-- ── BROW RIDGES (stern expression) ── -->
+  <path d="M198,158 Q224,148 244,160" fill="none" stroke="#d4a030" stroke-width="4" stroke-linecap="round"/>
+  <path d="M314,158 Q288,148 268,160" fill="none" stroke="#d4a030" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- ── EYES ── -->
+  <!-- Left eye: outer gold ring -->
+  <circle cx="224" cy="182" r="38" fill="url(#ic-gold)" filter="url(#ic-glow)"/>
+  <!-- Left eye: inner teal iris -->
+  <circle cx="224" cy="182" r="27" fill="url(#ic-eye)" filter="url(#ic-eyeGlow)"/>
+  <!-- Left eye: iris ring detail -->
+  <circle cx="224" cy="182" r="28" fill="none" stroke="#f5d070" stroke-width="1.5" opacity="0.5"/>
+  <!-- Left eye: pupil -->
+  <circle cx="224" cy="182" r="13" fill="#050f0f"/>
+  <!-- Left eye: shine -->
+  <circle cx="214" cy="172" r="7"  fill="#e8e4d0" opacity="0.9"/>
+  <circle cx="219" cy="177" r="3"  fill="#ffffff" opacity="0.6"/>
+
+  <!-- Right eye: outer gold ring -->
+  <circle cx="288" cy="182" r="38" fill="url(#ic-gold)" filter="url(#ic-glow)"/>
+  <!-- Right eye: inner teal iris -->
+  <circle cx="288" cy="182" r="27" fill="url(#ic-eye)" filter="url(#ic-eyeGlow)"/>
+  <!-- Right eye: iris ring detail -->
+  <circle cx="288" cy="182" r="28" fill="none" stroke="#f5d070" stroke-width="1.5" opacity="0.5"/>
+  <!-- Right eye: pupil -->
+  <circle cx="288" cy="182" r="13" fill="#050f0f"/>
+  <!-- Right eye: shine -->
+  <circle cx="278" cy="172" r="7"  fill="#e8e4d0" opacity="0.9"/>
+  <circle cx="283" cy="177" r="3"  fill="#ffffff" opacity="0.6"/>
+
+  <!-- ── BEAK ── -->
+  <polygon points="256,203 238,226 274,226" fill="url(#ic-goldV)"/>
+  <!-- Beak center crease -->
+  <line x1="242" y1="218" x2="270" y2="218" stroke="#9a6010" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- ═══════════════════════════════════════
+       CROSSED PEN & PENCIL
+  ═══════════════════════════════════════ -->
+
+  <!-- Drop shadows for tools -->
+  <line x1="74"  y1="328" x2="328" y2="264" stroke="#000" stroke-width="26" stroke-linecap="round" opacity="0.3" transform="translate(4,6)"/>
+  <line x1="438" y1="328" x2="184" y2="264" stroke="#000" stroke-width="26" stroke-linecap="round" opacity="0.3" transform="translate(4,6)"/>
+
+  <!-- ── FOUNTAIN PEN (lower-left → upper-right) ── -->
+  <g transform="rotate(-18, 200, 300)">
+    <!-- Barrel body -->
+    <rect x="80" y="288" width="240" height="22" rx="11" fill="url(#ic-tealDark)"/>
+    <!-- Barrel gold outline -->
+    <rect x="80" y="288" width="240" height="22" rx="11" fill="none" stroke="url(#ic-gold)" stroke-width="2.5"/>
+    <!-- Barrel shine stripe -->
+    <rect x="90" y="290" width="220" height="5" rx="2.5" fill="#ffffff" opacity="0.08"/>
+    <!-- Gold band rings -->
+    <rect x="168" y="288" width="10" height="22" rx="0" fill="#d4a030" opacity="0.8"/>
+    <rect x="200" y="288" width="6"  height="22" rx="0" fill="#d4a030" opacity="0.6"/>
+    <!-- Clip -->
+    <rect x="210" y="285" width="7" height="26" rx="3" fill="url(#ic-goldV)"/>
+    <!-- Nib (right side - upper right) -->
+    <polygon points="320,299 338,289 334,309" fill="url(#ic-goldV)"/>
+    <line x1="320" y1="299" x2="335" y2="299" stroke="#9a6010" stroke-width="1" opacity="0.6"/>
+    <!-- Cap end (left) -->
+    <ellipse cx="90" cy="299" rx="14" ry="11" fill="url(#ic-gold)"/>
+    <circle cx="90" cy="299" r="5" fill="#f7d878" opacity="0.6"/>
+  </g>
+
+  <!-- ── PENCIL (lower-right → upper-left) ── -->
+  <g transform="rotate(18, 312, 300)">
+    <!-- Pencil body -->
+    <rect x="192" y="288" width="236" height="22" rx="4" fill="url(#ic-tealDark)"/>
+    <!-- Pencil outline -->
+    <rect x="192" y="288" width="236" height="22" rx="4" fill="none" stroke="url(#ic-gold)" stroke-width="2.5"/>
+    <!-- Pencil barrel shine -->
+    <rect x="200" y="290" width="210" height="5" rx="2" fill="#ffffff" opacity="0.08"/>
+    <!-- Ferrule (metal band near eraser) -->
+    <rect x="390" y="288" width="16" height="22" fill="#d4a030" opacity="0.9"/>
+    <rect x="390" y="288" width="16" height="22" fill="none" stroke="#f7d878" stroke-width="1" opacity="0.5"/>
+    <!-- Eraser (right end) -->
+    <rect x="406" y="290" width="20" height="18" rx="4" fill="#d08080" opacity="0.85"/>
+    <!-- Pencil wood cone (left tip) -->
+    <polygon points="192,299 214,288 214,310" fill="#c8a060"/>
+    <!-- Pencil graphite tip -->
+    <polygon points="192,299 207,294 207,304" fill="#383838"/>
+  </g>
+
+  <!-- Center cross gem -->
+  <circle cx="256" cy="294" r="12" fill="url(#ic-gold)" filter="url(#ic-glow)"/>
+  <circle cx="256" cy="294" r="7"  fill="#f7d878"/>
+  <circle cx="256" cy="294" r="3"  fill="#fffbe0"/>
+
+  <!-- ═══════════════════════════════════════
+       "Study OS" TEXT
+  ═══════════════════════════════════════ -->
+
+  <!-- Text drop shadow -->
+  <text x="256" y="406"
+    text-anchor="middle"
+    font-family="Georgia, 'Book Antiqua', Palatino, serif"
+    font-size="76" font-weight="bold" letter-spacing="5"
+    fill="#000" opacity="0.4" transform="translate(3,5)">Study OS</text>
+
+  <!-- Main gold text -->
+  <text x="256" y="406"
+    text-anchor="middle"
+    font-family="Georgia, 'Book Antiqua', Palatino, serif"
+    font-size="76" font-weight="bold" letter-spacing="5"
+    fill="url(#ic-goldV)" filter="url(#ic-glow)">Study OS</text>
+
+  <!-- ── Text underline ornament ── -->
+  <line x1="148" y1="422" x2="364" y2="422" stroke="url(#ic-gold)" stroke-width="2" opacity="0.65"/>
+  <circle cx="148" cy="422" r="4" fill="#d4a030"/>
+  <circle cx="256" cy="422" r="5" fill="#f7d878" filter="url(#ic-glow)"/>
+  <circle cx="364" cy="422" r="4" fill="#d4a030"/>
+
+  <!-- ── Subtitle / tagline dots ── -->
+  <circle cx="214" cy="440" r="2" fill="#d4a030" opacity="0.5"/>
+  <circle cx="256" cy="440" r="2" fill="#d4a030" opacity="0.7"/>
+  <circle cx="298" cy="440" r="2" fill="#d4a030" opacity="0.5"/>
+
+  <!-- ── Bottom corner flourishes ── -->
+  <path d="M80,470 Q100,452 120,470" fill="none" stroke="#d4a030" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+  <path d="M392,470 Q412,452 432,470" fill="none" stroke="#d4a030" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+  <circle cx="80" cy="470" r="3" fill="#d4a030" opacity="0.4"/>
+  <circle cx="432" cy="470" r="3" fill="#d4a030" opacity="0.4"/>
 </svg>

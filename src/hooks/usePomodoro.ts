@@ -11,19 +11,20 @@ export function usePomodoro() {
     if (!store.isRunning) return
     const id = setInterval(() => store.tick(), 1000)
     return () => clearInterval(id)
-  }, [store.isRunning, store.tick])
+  }, [store.isRunning]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Detecta mudança de modo (sessão concluída)
   useEffect(() => {
     if (prevMode.current !== store.mode && prevMode.current === 'focus') {
       recordPomodoro(store.settings.focus)
     }
     prevMode.current = store.mode
-  }, [store.mode])
+  }, [store.mode]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const { mode, timeLeft, settings } = store
-  const totalSeconds = (mode === 'focus' ? settings.focus : mode === 'short-break' ? settings.shortBreak : settings.longBreak) * 60
-  const progressPct = ((totalSeconds - timeLeft) / totalSeconds) * 100
+  // Guards: prevent NaN if settings came from corrupted localStorage
+  const mins = mode === 'focus' ? settings.focus : mode === 'short-break' ? settings.shortBreak : settings.longBreak
+  const totalSeconds = Math.max(60, (Number.isFinite(mins) ? mins : 25) * 60)
+  const progressPct  = Math.min(100, Math.max(0, ((totalSeconds - timeLeft) / totalSeconds) * 100))
 
   return { ...store, progressPct }
 }

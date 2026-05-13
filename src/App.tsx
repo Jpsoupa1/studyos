@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { BrowserRouter } from 'react-router-dom'
 import Dashboard from '@/components/Dashboard'
 import AuthScreen from '@/components/AuthScreen'
 import CalendarSetup from '@/components/CalendarSetup'
@@ -122,8 +123,10 @@ function AppInner() {
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppInner />
-    </QueryClientProvider>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <AppInner />
+      </QueryClientProvider>
+    </BrowserRouter>
   )
 }
